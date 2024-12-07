@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Building the Database | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens</title>
+  <meta name="description" content="Chapter 2 Building the Database | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Building the Database | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Building the Database | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  
+  
+  
+
+<meta name="author" content="Walker Field" />
+
+
+<meta name="date" content="2024-12-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="sage-grouse-gps-data.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> A Foreward: Some Background for this Project</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#study-site"><i class="fa fa-check"></i><b>1.1</b> Study Site</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="building-the-database.html"><a href="building-the-database.html"><i class="fa fa-check"></i><b>2</b> Building the Database</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="building-the-database.html"><a href="building-the-database.html#database-layout"><i class="fa fa-check"></i><b>2.1</b> Database Layout</a></li>
+<li class="chapter" data-level="2.2" data-path="building-the-database.html"><a href="building-the-database.html#load-necessary-packages-and-initiate-database"><i class="fa fa-check"></i><b>2.2</b> Load Necessary Packages and Initiate Database</a></li>
+<li class="chapter" data-level="2.3" data-path="building-the-database.html"><a href="building-the-database.html#dams-table"><i class="fa fa-check"></i><b>2.3</b> Dams Table</a></li>
+<li class="chapter" data-level="2.4" data-path="building-the-database.html"><a href="building-the-database.html#hens-table"><i class="fa fa-check"></i><b>2.4</b> Hens Table</a></li>
+<li class="chapter" data-level="2.5" data-path="building-the-database.html"><a href="building-the-database.html#captures-table"><i class="fa fa-check"></i><b>2.5</b> Captures Table</a></li>
+<li class="chapter" data-level="2.6" data-path="building-the-database.html"><a href="building-the-database.html#gps-data-table"><i class="fa fa-check"></i><b>2.6</b> GPS Data Table</a></li>
+<li class="chapter" data-level="2.7" data-path="building-the-database.html"><a href="building-the-database.html#nests-table"><i class="fa fa-check"></i><b>2.7</b> Nests Table</a></li>
+<li class="chapter" data-level="2.8" data-path="building-the-database.html"><a href="building-the-database.html#broods-table"><i class="fa fa-check"></i><b>2.8</b> Broods Table</a></li>
+<li class="chapter" data-level="2.9" data-path="building-the-database.html"><a href="building-the-database.html#mortalities-table"><i class="fa fa-check"></i><b>2.9</b> Mortalities Table</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html"><i class="fa fa-check"></i><b>3</b> Sage-grouse GPS Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#load-packages-and-data"><i class="fa fa-check"></i><b>3.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="3.2" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#clean-the-data"><i class="fa fa-check"></i><b>3.2</b> Clean the Data</a></li>
+<li class="chapter" data-level="3.3" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#nest-the-data-not-a-sage-grouse-nest-yet"><i class="fa fa-check"></i><b>3.3</b> Nest (the Data, not a Sage-grouse Nest… yet)</a></li>
+<li class="chapter" data-level="3.4" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-unwanted-gps-fixes"><i class="fa fa-check"></i><b>3.4</b> Removing Unwanted GPS Fixes</a></li>
+<li class="chapter" data-level="3.5" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#deleting-duplicate-rows"><i class="fa fa-check"></i><b>3.5</b> Deleting Duplicate Rows</a></li>
+<li class="chapter" data-level="3.6" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-fast-steps"><i class="fa fa-check"></i><b>3.6</b> Removing Fast Steps</a></li>
+<li class="chapter" data-level="3.7" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-fast-roundtrips"><i class="fa fa-check"></i><b>3.7</b> Removing Fast Roundtrips</a></li>
+<li class="chapter" data-level="3.8" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#check-data-and-export"><i class="fa fa-check"></i><b>3.8</b> Check Data and Export</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="brooding-hens.html"><a href="brooding-hens.html"><i class="fa fa-check"></i><b>4</b> Brooding Hens</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="brooding-hens.html"><a href="brooding-hens.html#load-packages-and-data-1"><i class="fa fa-check"></i><b>4.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="4.2" data-path="brooding-hens.html"><a href="brooding-hens.html#nests"><i class="fa fa-check"></i><b>4.2</b> Nests</a></li>
+<li class="chapter" data-level="4.3" data-path="brooding-hens.html"><a href="brooding-hens.html#non-attempts"><i class="fa fa-check"></i><b>4.3</b> Non-attempts</a></li>
+<li class="chapter" data-level="4.4" data-path="brooding-hens.html"><a href="brooding-hens.html#its-a-mama-party"><i class="fa fa-check"></i><b>4.4</b> It’s a Mama Party</a></li>
+<li class="chapter" data-level="4.5" data-path="brooding-hens.html"><a href="brooding-hens.html#brood-data"><i class="fa fa-check"></i><b>4.5</b> Brood Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-beavers.html"><a href="the-beavers.html"><i class="fa fa-check"></i><b>5</b> The Beavers</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-beavers.html"><a href="the-beavers.html#load-packages-and-data-2"><i class="fa fa-check"></i><b>5.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="5.2" data-path="the-beavers.html"><a href="the-beavers.html#clean-the-dam-data"><i class="fa fa-check"></i><b>5.2</b> Clean the (Dam) Data</a></li>
+<li class="chapter" data-level="5.3" data-path="the-beavers.html"><a href="the-beavers.html#template"><i class="fa fa-check"></i><b>5.3</b> Template</a></li>
+<li class="chapter" data-level="5.4" data-path="the-beavers.html"><a href="the-beavers.html#dam-conversion"><i class="fa fa-check"></i><b>5.4</b> Dam Conversion</a></li>
+<li class="chapter" data-level="5.5" data-path="the-beavers.html"><a href="the-beavers.html#raster-calculations"><i class="fa fa-check"></i><b>5.5</b> Raster Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lets-plot.html"><a href="lets-plot.html"><i class="fa fa-check"></i><b>6</b> Let’s Plot!</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="lets-plot.html"><a href="lets-plot.html#load-packages-and-data-3"><i class="fa fa-check"></i><b>6.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="6.2" data-path="lets-plot.html"><a href="lets-plot.html#visualize-the-data"><i class="fa fa-check"></i><b>6.2</b> Visualize the Data</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="building-the-database" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Building the Database<a href="building-the-database.html#building-the-database" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this first chapter, we will explore the process of building an SQLite database and tables using R code, and importing data into each table.</p>
+<div id="database-layout" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Database Layout<a href="building-the-database.html#database-layout" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This is a diagram of the final database system that we will build in the following sections. There are two parent tables, Dams and Hens. The Dams table will not have any tables linked to it, and the Hens table will have five tables linked to it that contain different categories of data collected in the field.</p>
+<div class="float">
+<img src="../../Assignments/Assignment_4.png" alt="Database layout" />
+<div class="figcaption">Database layout</div>
+</div>
+</div>
+<div id="load-necessary-packages-and-initiate-database" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Load Necessary Packages and Initiate Database<a href="building-the-database.html#load-necessary-packages-and-initiate-database" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First we have to load the necessary Rstudio packages for this chapter and build the database. It will be named “MS_grsg”, because this is my Master’s research and the greater sage-grouse is the focal species.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="building-the-database.html#cb1-1" tabindex="-1"></a><span class="co"># load package</span></span>
+<span id="cb1-2"><a href="building-the-database.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb1-3"><a href="building-the-database.html#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="building-the-database.html#cb1-4" tabindex="-1"></a><span class="co"># load data</span></span>
+<span id="cb1-5"><a href="building-the-database.html#cb1-5" tabindex="-1"></a>MS_grsg <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(),<span class="st">&quot;MS_grsg.db&quot;</span>)</span></code></pre></div>
+</div>
+<div id="dams-table" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Dams Table<a href="building-the-database.html#dams-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Next, we will begin to build our tables and populate our “MS_grsg” database in SQLite. The first table that we’ll build is the Dams table. This table includes dam identification, coordinates, type, status, canopy cover, and various numeric measurements. This is a parent table, and will not have any connections to any other tables created after this (i.e. no foreign key connections).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="building-the-database.html#cb2-1" tabindex="-1"></a><span class="co"># create table</span></span>
+<span id="cb2-2"><a href="building-the-database.html#cb2-2" tabindex="-1"></a><span class="fu">dbExecute</span>(MS_grsg, <span class="st">&#39;create table dams(</span></span>
+<span id="cb2-3"><a href="building-the-database.html#cb2-3" tabindex="-1"></a><span class="st">    dam_id varchar(10) not null primary key,</span></span>
+<span id="cb2-4"><a href="building-the-database.html#cb2-4" tabindex="-1"></a><span class="st">    type char(3) check (type in (&quot;NAT&quot;, &quot;BDA&quot;)),</span></span>
+<span id="cb2-5"><a href="building-the-database.html#cb2-5" tabindex="-1"></a><span class="st">    x real,</span></span>
+<span id="cb2-6"><a href="building-the-database.html#cb2-6" tabindex="-1"></a><span class="st">    y real,</span></span>
+<span id="cb2-7"><a href="building-the-database.html#cb2-7" tabindex="-1"></a><span class="st">    status char(1) check (status in (&quot;A&quot;, &quot;I&quot;, &quot;B&quot;)),</span></span>
+<span id="cb2-8"><a href="building-the-database.html#cb2-8" tabindex="-1"></a><span class="st">    canopy char(1) check (canopy in (&quot;O&quot;, &quot;S&quot;, &quot;D&quot;)),</span></span>
+<span id="cb2-9"><a href="building-the-database.html#cb2-9" tabindex="-1"></a><span class="st">    length real,</span></span>
+<span id="cb2-10"><a href="building-the-database.html#cb2-10" tabindex="-1"></a><span class="st">    width real,</span></span>
+<span id="cb2-11"><a href="building-the-database.html#cb2-11" tabindex="-1"></a><span class="st">    height real,</span></span>
+<span id="cb2-12"><a href="building-the-database.html#cb2-12" tabindex="-1"></a><span class="st">    water_table real</span></span>
+<span id="cb2-13"><a href="building-the-database.html#cb2-13" tabindex="-1"></a><span class="st">    );&#39;</span>)</span>
+<span id="cb2-14"><a href="building-the-database.html#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="building-the-database.html#cb2-15" tabindex="-1"></a><span class="co"># read in data</span></span>
+<span id="cb2-16"><a href="building-the-database.html#cb2-16" tabindex="-1"></a>dams <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Dam Censusing.csv&quot;</span>)</span>
+<span id="cb2-17"><a href="building-the-database.html#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="building-the-database.html#cb2-18" tabindex="-1"></a><span class="co"># load data into SQL table</span></span>
+<span id="cb2-19"><a href="building-the-database.html#cb2-19" tabindex="-1"></a><span class="fu">dbWriteTable</span>(MS_grsg, <span class="st">&quot;dams&quot;</span>, dams, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="hens-table" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Hens Table<a href="building-the-database.html#hens-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This table contains only the unique hen identification, created from each GPS backpack, and the sex of the captured bird (hint: they’re all females). This is our second parent table for this entire data set. Every table created after this will be linked to this table by way of the “hen_ID” column.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="building-the-database.html#cb3-1" tabindex="-1"></a><span class="co"># create table</span></span>
+<span id="cb3-2"><a href="building-the-database.html#cb3-2" tabindex="-1"></a><span class="fu">dbExecute</span>(MS_grsg, <span class="st">&#39;create table hens(</span></span>
+<span id="cb3-3"><a href="building-the-database.html#cb3-3" tabindex="-1"></a><span class="st">    hen_ID varchar(6) not null primary key,</span></span>
+<span id="cb3-4"><a href="building-the-database.html#cb3-4" tabindex="-1"></a><span class="st">    sex char(1) check(sex in (&quot;M&quot;, &quot;F&quot;))</span></span>
+<span id="cb3-5"><a href="building-the-database.html#cb3-5" tabindex="-1"></a><span class="st">    );&#39;</span>)</span>
+<span id="cb3-6"><a href="building-the-database.html#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="building-the-database.html#cb3-7" tabindex="-1"></a><span class="co"># read in data</span></span>
+<span id="cb3-8"><a href="building-the-database.html#cb3-8" tabindex="-1"></a>hens <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Hens.csv&quot;</span>)</span>
+<span id="cb3-9"><a href="building-the-database.html#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="building-the-database.html#cb3-10" tabindex="-1"></a><span class="co"># load data into SQL table</span></span>
+<span id="cb3-11"><a href="building-the-database.html#cb3-11" tabindex="-1"></a><span class="fu">dbWriteTable</span>(MS_grsg, <span class="st">&quot;hens&quot;</span>, hens, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="captures-table" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Captures Table<a href="building-the-database.html#captures-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here we will create the table that contains all of the data concerning the sage-grouse captures, including PTT identification, VHF frequency, capture date, time, and coordinates, and the weight and age of the bird. This table is linked to the Hens table.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="building-the-database.html#cb4-1" tabindex="-1"></a><span class="co"># create table</span></span>
+<span id="cb4-2"><a href="building-the-database.html#cb4-2" tabindex="-1"></a><span class="fu">dbExecute</span>(MS_grsg, <span class="st">&#39;create table capture(</span></span>
+<span id="cb4-3"><a href="building-the-database.html#cb4-3" tabindex="-1"></a><span class="st">    cap_event varchar(20) not null primary key,</span></span>
+<span id="cb4-4"><a href="building-the-database.html#cb4-4" tabindex="-1"></a><span class="st">    PTT_ID varchar(3),</span></span>
+<span id="cb4-5"><a href="building-the-database.html#cb4-5" tabindex="-1"></a><span class="st">    hen_ID varchar(6),</span></span>
+<span id="cb4-6"><a href="building-the-database.html#cb4-6" tabindex="-1"></a><span class="st">    VHF_Freq real,</span></span>
+<span id="cb4-7"><a href="building-the-database.html#cb4-7" tabindex="-1"></a><span class="st">    date date,</span></span>
+<span id="cb4-8"><a href="building-the-database.html#cb4-8" tabindex="-1"></a><span class="st">    time time,</span></span>
+<span id="cb4-9"><a href="building-the-database.html#cb4-9" tabindex="-1"></a><span class="st">    x real,</span></span>
+<span id="cb4-10"><a href="building-the-database.html#cb4-10" tabindex="-1"></a><span class="st">    y real,</span></span>
+<span id="cb4-11"><a href="building-the-database.html#cb4-11" tabindex="-1"></a><span class="st">    weight integer,</span></span>
+<span id="cb4-12"><a href="building-the-database.html#cb4-12" tabindex="-1"></a><span class="st">    age varchar(1) check (age in (&quot;A&quot;, &quot;Y&quot;)),</span></span>
+<span id="cb4-13"><a href="building-the-database.html#cb4-13" tabindex="-1"></a><span class="st">    foreign key (hen_ID) references hens(hen_ID)</span></span>
+<span id="cb4-14"><a href="building-the-database.html#cb4-14" tabindex="-1"></a><span class="st">    );&#39;</span>)</span>
+<span id="cb4-15"><a href="building-the-database.html#cb4-15" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="building-the-database.html#cb4-16" tabindex="-1"></a><span class="co"># read in data</span></span>
+<span id="cb4-17"><a href="building-the-database.html#cb4-17" tabindex="-1"></a>captures <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Capture.csv&quot;</span>)</span>
+<span id="cb4-18"><a href="building-the-database.html#cb4-18" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="building-the-database.html#cb4-19" tabindex="-1"></a><span class="co"># load data into SQL table</span></span>
+<span id="cb4-20"><a href="building-the-database.html#cb4-20" tabindex="-1"></a><span class="fu">dbWriteTable</span>(MS_grsg, <span class="st">&quot;capture&quot;</span>, captures, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="gps-data-table" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> GPS Data Table<a href="building-the-database.html#gps-data-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This table contains the timestamps for each hen’s hourly location fix, as well as the coordinates associated with each fix. It is linked to the Hens table.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="building-the-database.html#cb5-1" tabindex="-1"></a><span class="co"># create table</span></span>
+<span id="cb5-2"><a href="building-the-database.html#cb5-2" tabindex="-1"></a><span class="fu">dbExecute</span>(MS_grsg, <span class="st">&#39;create table gps_data(</span></span>
+<span id="cb5-3"><a href="building-the-database.html#cb5-3" tabindex="-1"></a><span class="st">    timestamp varchar(50) not null primary key,</span></span>
+<span id="cb5-4"><a href="building-the-database.html#cb5-4" tabindex="-1"></a><span class="st">    hen_ID varchar(6),</span></span>
+<span id="cb5-5"><a href="building-the-database.html#cb5-5" tabindex="-1"></a><span class="st">    x real,</span></span>
+<span id="cb5-6"><a href="building-the-database.html#cb5-6" tabindex="-1"></a><span class="st">    y real,</span></span>
+<span id="cb5-7"><a href="building-the-database.html#cb5-7" tabindex="-1"></a><span class="st">    foreign key (hen_ID) references hens(hen_ID)</span></span>
+<span id="cb5-8"><a href="building-the-database.html#cb5-8" tabindex="-1"></a><span class="st">    );&#39;</span>)</span>
+<span id="cb5-9"><a href="building-the-database.html#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="building-the-database.html#cb5-10" tabindex="-1"></a><span class="co"># read in data</span></span>
+<span id="cb5-11"><a href="building-the-database.html#cb5-11" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">&quot;raw_data/druid/&quot;</span></span>
+<span id="cb5-12"><a href="building-the-database.html#cb5-12" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="building-the-database.html#cb5-13" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">list.files</span>(path, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;ArgosData&quot;</span>)</span>
+<span id="cb5-14"><a href="building-the-database.html#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="building-the-database.html#cb5-15" tabindex="-1"></a><span class="co"># to create a file for all the hens&#39; GPS data for entire season, in a single .csv</span></span>
+<span id="cb5-16"><a href="building-the-database.html#cb5-16" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb5-17"><a href="building-the-database.html#cb5-17" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="building-the-database.html#cb5-18" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(f)) {</span>
+<span id="cb5-19"><a href="building-the-database.html#cb5-19" tabindex="-1"></a>  </span>
+<span id="cb5-20"><a href="building-the-database.html#cb5-20" tabindex="-1"></a>  current_file <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(path, f[i]))</span>
+<span id="cb5-21"><a href="building-the-database.html#cb5-21" tabindex="-1"></a>  </span>
+<span id="cb5-22"><a href="building-the-database.html#cb5-22" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dat, current_file)}</span>
+<span id="cb5-23"><a href="building-the-database.html#cb5-23" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="building-the-database.html#cb5-24" tabindex="-1"></a><span class="co"># now to remove duplicate lines of data so that the file is continuous</span></span>
+<span id="cb5-25"><a href="building-the-database.html#cb5-25" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> dat[<span class="sc">!</span><span class="fu">duplicated</span>(dat), ]</span>
+<span id="cb5-26"><a href="building-the-database.html#cb5-26" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="building-the-database.html#cb5-27" tabindex="-1"></a><span class="co"># load data into SQL table</span></span>
+<span id="cb5-28"><a href="building-the-database.html#cb5-28" tabindex="-1"></a><span class="fu">dbWriteTable</span>(MS_grsg, <span class="st">&quot;gps_data&quot;</span>, all_hens, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="nests-table" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Nests Table<a href="building-the-database.html#nests-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here, we are creating the table that holds all of the nest information, including coordinates, nest fate, and number of eggs. It is linked to the Hens table.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="building-the-database.html#cb6-1" tabindex="-1"></a><span class="co"># create table</span></span>
+<span id="cb6-2"><a href="building-the-database.html#cb6-2" tabindex="-1"></a><span class="fu">dbExecute</span>(MS_grsg, <span class="st">&#39;create table nests(</span></span>
+<span id="cb6-3"><a href="building-the-database.html#cb6-3" tabindex="-1"></a><span class="st">    nest_ID varchar(11) not null primary key,</span></span>
+<span id="cb6-4"><a href="building-the-database.html#cb6-4" tabindex="-1"></a><span class="st">    hen_ID varchar(6),</span></span>
+<span id="cb6-5"><a href="building-the-database.html#cb6-5" tabindex="-1"></a><span class="st">    x real,</span></span>
+<span id="cb6-6"><a href="building-the-database.html#cb6-6" tabindex="-1"></a><span class="st">    y real,</span></span>
+<span id="cb6-7"><a href="building-the-database.html#cb6-7" tabindex="-1"></a><span class="st">    fate varchar(7) check (fate in (&quot;Hatched&quot;, &quot;Failed&quot;)),</span></span>
+<span id="cb6-8"><a href="building-the-database.html#cb6-8" tabindex="-1"></a><span class="st">    num_of_eggs real,</span></span>
+<span id="cb6-9"><a href="building-the-database.html#cb6-9" tabindex="-1"></a><span class="st">    foreign key (hen_ID) references hens(hen_ID)</span></span>
+<span id="cb6-10"><a href="building-the-database.html#cb6-10" tabindex="-1"></a><span class="st">    );&#39;</span>)</span>
+<span id="cb6-11"><a href="building-the-database.html#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="building-the-database.html#cb6-12" tabindex="-1"></a><span class="co"># read in data</span></span>
+<span id="cb6-13"><a href="building-the-database.html#cb6-13" tabindex="-1"></a>nests <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Nests.csv&quot;</span>)</span>
+<span id="cb6-14"><a href="building-the-database.html#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="building-the-database.html#cb6-15" tabindex="-1"></a><span class="co"># load data into SQL table</span></span>
+<span id="cb6-16"><a href="building-the-database.html#cb6-16" tabindex="-1"></a><span class="fu">dbWriteTable</span>(MS_grsg, <span class="st">&quot;nests&quot;</span>, nests, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="broods-table" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> Broods Table<a href="building-the-database.html#broods-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This table contains all of the data associated with brood surveys throughout the season. Once a successful nest hatch was confirmed, brood surveys would be initiated for that brooding hen from 5 days after hatch to 50 days, with surveys occurring at 5-day intervals. The data in this table includes date, time, brood age, coordinates, brood status, and the number of chicks found. It is linked to the Hens table.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="building-the-database.html#cb7-1" tabindex="-1"></a><span class="co"># create table</span></span>
+<span id="cb7-2"><a href="building-the-database.html#cb7-2" tabindex="-1"></a><span class="fu">dbExecute</span>(MS_grsg, <span class="st">&#39;create table broods(</span></span>
+<span id="cb7-3"><a href="building-the-database.html#cb7-3" tabindex="-1"></a><span class="st">    brood_ID varchar(9) not null primary key,</span></span>
+<span id="cb7-4"><a href="building-the-database.html#cb7-4" tabindex="-1"></a><span class="st">    hen_ID varchar (6),</span></span>
+<span id="cb7-5"><a href="building-the-database.html#cb7-5" tabindex="-1"></a><span class="st">    date date,</span></span>
+<span id="cb7-6"><a href="building-the-database.html#cb7-6" tabindex="-1"></a><span class="st">    time time,</span></span>
+<span id="cb7-7"><a href="building-the-database.html#cb7-7" tabindex="-1"></a><span class="st">    observer varchar(9) check (observer in (&quot;W_Field&quot;, &quot;T_Hoffman&quot;)),</span></span>
+<span id="cb7-8"><a href="building-the-database.html#cb7-8" tabindex="-1"></a><span class="st">    DAH integer,</span></span>
+<span id="cb7-9"><a href="building-the-database.html#cb7-9" tabindex="-1"></a><span class="st">    x real,</span></span>
+<span id="cb7-10"><a href="building-the-database.html#cb7-10" tabindex="-1"></a><span class="st">    y real,</span></span>
+<span id="cb7-11"><a href="building-the-database.html#cb7-11" tabindex="-1"></a><span class="st">    brood_detected varchar(3) check (brood_detected in (&quot;Yes&quot;, &quot;No&quot;)),</span></span>
+<span id="cb7-12"><a href="building-the-database.html#cb7-12" tabindex="-1"></a><span class="st">    num_of_chicks varchar(2),</span></span>
+<span id="cb7-13"><a href="building-the-database.html#cb7-13" tabindex="-1"></a><span class="st">    foreign key (hen_ID) references hens(hen_ID)</span></span>
+<span id="cb7-14"><a href="building-the-database.html#cb7-14" tabindex="-1"></a><span class="st">    );&#39;</span>)</span>
+<span id="cb7-15"><a href="building-the-database.html#cb7-15" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="building-the-database.html#cb7-16" tabindex="-1"></a><span class="co"># read in data</span></span>
+<span id="cb7-17"><a href="building-the-database.html#cb7-17" tabindex="-1"></a>broods <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Broods.csv&quot;</span>)</span>
+<span id="cb7-18"><a href="building-the-database.html#cb7-18" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="building-the-database.html#cb7-19" tabindex="-1"></a><span class="co"># load data into SQL table</span></span>
+<span id="cb7-20"><a href="building-the-database.html#cb7-20" tabindex="-1"></a><span class="fu">dbWriteTable</span>(MS_grsg, <span class="st">&quot;broods&quot;</span>, broods, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="mortalities-table" class="section level2 hasAnchor" number="2.9">
+<h2><span class="header-section-number">2.9</span> Mortalities Table<a href="building-the-database.html#mortalities-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here we will create the table that contains the unfortunate information concerning our dearly departed sage-grouse hens. The data includes the observer that found the hen, date, time, and coordinates, and the estimated day of death as well as fate of the bird (was she depredated, slipped the backpack, or is it unknown?). This table is linked to the Hens table.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="building-the-database.html#cb8-1" tabindex="-1"></a><span class="co"># create table</span></span>
+<span id="cb8-2"><a href="building-the-database.html#cb8-2" tabindex="-1"></a><span class="fu">dbExecute</span>(MS_grsg, <span class="st">&#39;create table mortalities(</span></span>
+<span id="cb8-3"><a href="building-the-database.html#cb8-3" tabindex="-1"></a><span class="st">    mort_ID varchar(8) not null primary key,</span></span>
+<span id="cb8-4"><a href="building-the-database.html#cb8-4" tabindex="-1"></a><span class="st">    hen_ID varchar(6),</span></span>
+<span id="cb8-5"><a href="building-the-database.html#cb8-5" tabindex="-1"></a><span class="st">    observer varchar(9) check (observer in (&quot;W_Field&quot;, &quot;T_Hoffman&quot;)),</span></span>
+<span id="cb8-6"><a href="building-the-database.html#cb8-6" tabindex="-1"></a><span class="st">    date date,</span></span>
+<span id="cb8-7"><a href="building-the-database.html#cb8-7" tabindex="-1"></a><span class="st">    time time,</span></span>
+<span id="cb8-8"><a href="building-the-database.html#cb8-8" tabindex="-1"></a><span class="st">    x real,</span></span>
+<span id="cb8-9"><a href="building-the-database.html#cb8-9" tabindex="-1"></a><span class="st">    y real,</span></span>
+<span id="cb8-10"><a href="building-the-database.html#cb8-10" tabindex="-1"></a><span class="st">    day_of_death date,</span></span>
+<span id="cb8-11"><a href="building-the-database.html#cb8-11" tabindex="-1"></a><span class="st">    fate varchar(9) check (fate in (&quot;Mortality&quot;, &quot;Slip&quot;, &quot;Unknown&quot;)),</span></span>
+<span id="cb8-12"><a href="building-the-database.html#cb8-12" tabindex="-1"></a><span class="st">    foreign key (hen_ID) references hens(hen_ID)</span></span>
+<span id="cb8-13"><a href="building-the-database.html#cb8-13" tabindex="-1"></a><span class="st">    );&#39;</span>)</span>
+<span id="cb8-14"><a href="building-the-database.html#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="building-the-database.html#cb8-15" tabindex="-1"></a><span class="co"># read in data</span></span>
+<span id="cb8-16"><a href="building-the-database.html#cb8-16" tabindex="-1"></a>morts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Mortalities.csv&quot;</span>)</span>
+<span id="cb8-17"><a href="building-the-database.html#cb8-17" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="building-the-database.html#cb8-18" tabindex="-1"></a><span class="co"># load data into SQL table</span></span>
+<span id="cb8-19"><a href="building-the-database.html#cb8-19" tabindex="-1"></a><span class="fu">dbWriteTable</span>(MS_grsg, <span class="st">&quot;mortalities&quot;</span>, morts, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sage-grouse-gps-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Sage-grouse GPS Data | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens</title>
+  <meta name="description" content="Chapter 3 Sage-grouse GPS Data | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Sage-grouse GPS Data | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Sage-grouse GPS Data | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  
+  
+  
+
+<meta name="author" content="Walker Field" />
+
+
+<meta name="date" content="2024-12-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="building-the-database.html"/>
+<link rel="next" href="brooding-hens.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> A Foreward: Some Background for this Project</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#study-site"><i class="fa fa-check"></i><b>1.1</b> Study Site</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="building-the-database.html"><a href="building-the-database.html"><i class="fa fa-check"></i><b>2</b> Building the Database</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="building-the-database.html"><a href="building-the-database.html#database-layout"><i class="fa fa-check"></i><b>2.1</b> Database Layout</a></li>
+<li class="chapter" data-level="2.2" data-path="building-the-database.html"><a href="building-the-database.html#load-necessary-packages-and-initiate-database"><i class="fa fa-check"></i><b>2.2</b> Load Necessary Packages and Initiate Database</a></li>
+<li class="chapter" data-level="2.3" data-path="building-the-database.html"><a href="building-the-database.html#dams-table"><i class="fa fa-check"></i><b>2.3</b> Dams Table</a></li>
+<li class="chapter" data-level="2.4" data-path="building-the-database.html"><a href="building-the-database.html#hens-table"><i class="fa fa-check"></i><b>2.4</b> Hens Table</a></li>
+<li class="chapter" data-level="2.5" data-path="building-the-database.html"><a href="building-the-database.html#captures-table"><i class="fa fa-check"></i><b>2.5</b> Captures Table</a></li>
+<li class="chapter" data-level="2.6" data-path="building-the-database.html"><a href="building-the-database.html#gps-data-table"><i class="fa fa-check"></i><b>2.6</b> GPS Data Table</a></li>
+<li class="chapter" data-level="2.7" data-path="building-the-database.html"><a href="building-the-database.html#nests-table"><i class="fa fa-check"></i><b>2.7</b> Nests Table</a></li>
+<li class="chapter" data-level="2.8" data-path="building-the-database.html"><a href="building-the-database.html#broods-table"><i class="fa fa-check"></i><b>2.8</b> Broods Table</a></li>
+<li class="chapter" data-level="2.9" data-path="building-the-database.html"><a href="building-the-database.html#mortalities-table"><i class="fa fa-check"></i><b>2.9</b> Mortalities Table</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html"><i class="fa fa-check"></i><b>3</b> Sage-grouse GPS Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#load-packages-and-data"><i class="fa fa-check"></i><b>3.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="3.2" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#clean-the-data"><i class="fa fa-check"></i><b>3.2</b> Clean the Data</a></li>
+<li class="chapter" data-level="3.3" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#nest-the-data-not-a-sage-grouse-nest-yet"><i class="fa fa-check"></i><b>3.3</b> Nest (the Data, not a Sage-grouse Nest… yet)</a></li>
+<li class="chapter" data-level="3.4" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-unwanted-gps-fixes"><i class="fa fa-check"></i><b>3.4</b> Removing Unwanted GPS Fixes</a></li>
+<li class="chapter" data-level="3.5" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#deleting-duplicate-rows"><i class="fa fa-check"></i><b>3.5</b> Deleting Duplicate Rows</a></li>
+<li class="chapter" data-level="3.6" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-fast-steps"><i class="fa fa-check"></i><b>3.6</b> Removing Fast Steps</a></li>
+<li class="chapter" data-level="3.7" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-fast-roundtrips"><i class="fa fa-check"></i><b>3.7</b> Removing Fast Roundtrips</a></li>
+<li class="chapter" data-level="3.8" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#check-data-and-export"><i class="fa fa-check"></i><b>3.8</b> Check Data and Export</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="brooding-hens.html"><a href="brooding-hens.html"><i class="fa fa-check"></i><b>4</b> Brooding Hens</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="brooding-hens.html"><a href="brooding-hens.html#load-packages-and-data-1"><i class="fa fa-check"></i><b>4.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="4.2" data-path="brooding-hens.html"><a href="brooding-hens.html#nests"><i class="fa fa-check"></i><b>4.2</b> Nests</a></li>
+<li class="chapter" data-level="4.3" data-path="brooding-hens.html"><a href="brooding-hens.html#non-attempts"><i class="fa fa-check"></i><b>4.3</b> Non-attempts</a></li>
+<li class="chapter" data-level="4.4" data-path="brooding-hens.html"><a href="brooding-hens.html#its-a-mama-party"><i class="fa fa-check"></i><b>4.4</b> It’s a Mama Party</a></li>
+<li class="chapter" data-level="4.5" data-path="brooding-hens.html"><a href="brooding-hens.html#brood-data"><i class="fa fa-check"></i><b>4.5</b> Brood Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-beavers.html"><a href="the-beavers.html"><i class="fa fa-check"></i><b>5</b> The Beavers</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-beavers.html"><a href="the-beavers.html#load-packages-and-data-2"><i class="fa fa-check"></i><b>5.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="5.2" data-path="the-beavers.html"><a href="the-beavers.html#clean-the-dam-data"><i class="fa fa-check"></i><b>5.2</b> Clean the (Dam) Data</a></li>
+<li class="chapter" data-level="5.3" data-path="the-beavers.html"><a href="the-beavers.html#template"><i class="fa fa-check"></i><b>5.3</b> Template</a></li>
+<li class="chapter" data-level="5.4" data-path="the-beavers.html"><a href="the-beavers.html#dam-conversion"><i class="fa fa-check"></i><b>5.4</b> Dam Conversion</a></li>
+<li class="chapter" data-level="5.5" data-path="the-beavers.html"><a href="the-beavers.html#raster-calculations"><i class="fa fa-check"></i><b>5.5</b> Raster Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lets-plot.html"><a href="lets-plot.html"><i class="fa fa-check"></i><b>6</b> Let’s Plot!</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="lets-plot.html"><a href="lets-plot.html#load-packages-and-data-3"><i class="fa fa-check"></i><b>6.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="6.2" data-path="lets-plot.html"><a href="lets-plot.html#visualize-the-data"><i class="fa fa-check"></i><b>6.2</b> Visualize the Data</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sage-grouse-gps-data" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Sage-grouse GPS Data<a href="sage-grouse-gps-data.html#sage-grouse-gps-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter will discuss the manipulation of sage-grouse GPS data, collected by GPS backpacks at a 1-hour interval, 24 hours a day. The purpose of the GPS data is to analyze brooding hen space-use decisions within the landscape. The code in this chapter is the longest included in this document, but it will be broken down into sections in order to improve digestibility.</p>
+<div id="load-packages-and-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Load Packages and Data<a href="sage-grouse-gps-data.html#load-packages-and-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First, we must load our required packages for this script, then load the necessary data into the Rstudio environment.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sage-grouse-gps-data.html#cb9-1" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb9-2"><a href="sage-grouse-gps-data.html#cb9-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-3"><a href="sage-grouse-gps-data.html#cb9-3" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb9-4"><a href="sage-grouse-gps-data.html#cb9-4" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb9-5"><a href="sage-grouse-gps-data.html#cb9-5" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-6"><a href="sage-grouse-gps-data.html#cb9-6" tabindex="-1"></a><span class="fu">library</span>(amt)</span>
+<span id="cb9-7"><a href="sage-grouse-gps-data.html#cb9-7" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb9-8"><a href="sage-grouse-gps-data.html#cb9-8" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits=</span><span class="dv">10</span>)</span>
+<span id="cb9-9"><a href="sage-grouse-gps-data.html#cb9-9" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="sage-grouse-gps-data.html#cb9-10" tabindex="-1"></a><span class="do">## combine all hen data into one csv ----</span></span>
+<span id="cb9-11"><a href="sage-grouse-gps-data.html#cb9-11" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="sage-grouse-gps-data.html#cb9-12" tabindex="-1"></a><span class="co"># change path to working directory:</span></span>
+<span id="cb9-13"><a href="sage-grouse-gps-data.html#cb9-13" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">&quot;../../../../MS Work/Analyses/raw_data/druid/&quot;</span></span>
+<span id="cb9-14"><a href="sage-grouse-gps-data.html#cb9-14" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="sage-grouse-gps-data.html#cb9-15" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">list.files</span>(path, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;ArgosData&quot;</span>)</span>
+<span id="cb9-16"><a href="sage-grouse-gps-data.html#cb9-16" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="sage-grouse-gps-data.html#cb9-17" tabindex="-1"></a><span class="co"># to create a file for all the hens&#39; GPS data for entire season, in a single .csv</span></span>
+<span id="cb9-18"><a href="sage-grouse-gps-data.html#cb9-18" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb9-19"><a href="sage-grouse-gps-data.html#cb9-19" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="sage-grouse-gps-data.html#cb9-20" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(f)) {</span>
+<span id="cb9-21"><a href="sage-grouse-gps-data.html#cb9-21" tabindex="-1"></a>  </span>
+<span id="cb9-22"><a href="sage-grouse-gps-data.html#cb9-22" tabindex="-1"></a>  current_file <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(path, f[i]))</span>
+<span id="cb9-23"><a href="sage-grouse-gps-data.html#cb9-23" tabindex="-1"></a>  </span>
+<span id="cb9-24"><a href="sage-grouse-gps-data.html#cb9-24" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dat, current_file)}</span>
+<span id="cb9-25"><a href="sage-grouse-gps-data.html#cb9-25" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="sage-grouse-gps-data.html#cb9-26" tabindex="-1"></a><span class="co"># now to remove duplicate lines of data so that the file is continuous</span></span>
+<span id="cb9-27"><a href="sage-grouse-gps-data.html#cb9-27" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> dat[<span class="sc">!</span><span class="fu">duplicated</span>(dat), ]</span></code></pre></div>
+</div>
+<div id="clean-the-data" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Clean the Data<a href="sage-grouse-gps-data.html#clean-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now, we will begin the long task of cleaning. It is important to note that because we’re working with 23 individual birds, at some point in this script we will have to nest each hen’s data within its own data frame. That must be done so that R recognizes each hen’s respective GPS data as an individual; otherwise, if we continued working within a single data frame, R would not recognize the GPS data as belonging to 23 individuals, <em>even though each GPS fix is associated with the hen it belongs to</em>. But we don’t have to worry about that yet! The initial cleaning can be done within a single data frame, because the functions we’re using don’t have to apply to each individual, but to the data set as a whole. See the section subheadings, denoted with #, for an explanation of the code being used.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sage-grouse-gps-data.html#cb10-1" tabindex="-1"></a><span class="co"># to clean up names and remove unwanted columns</span></span>
+<span id="cb10-2"><a href="sage-grouse-gps-data.html#cb10-2" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(all_hens) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>synchronizing_time, <span class="sc">-</span>transmitting_time, <span class="sc">-</span>altitude)</span>
+<span id="cb10-3"><a href="sage-grouse-gps-data.html#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="sage-grouse-gps-data.html#cb10-4" tabindex="-1"></a><span class="co"># to change uuid column to &quot;hen&quot;</span></span>
+<span id="cb10-5"><a href="sage-grouse-gps-data.html#cb10-5" tabindex="-1"></a>all_hens<span class="sc">$</span>hen <span class="ot">&lt;-</span>  <span class="fu">substring</span>(all_hens<span class="sc">$</span>uuid, <span class="dv">8</span>, <span class="dv">10</span>)</span>
+<span id="cb10-6"><a href="sage-grouse-gps-data.html#cb10-6" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> all_hens <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>uuid) <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(<span class="st">&quot;hen&quot;</span>, <span class="at">.before =</span> <span class="st">&quot;collecting_time&quot;</span>)</span>
+<span id="cb10-7"><a href="sage-grouse-gps-data.html#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="sage-grouse-gps-data.html#cb10-8" tabindex="-1"></a><span class="co"># split up collecting_time column</span></span>
+<span id="cb10-9"><a href="sage-grouse-gps-data.html#cb10-9" tabindex="-1"></a>all_hens<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">substring</span>(all_hens<span class="sc">$</span>collecting_time, <span class="dv">12</span>, <span class="dv">19</span>)</span>
+<span id="cb10-10"><a href="sage-grouse-gps-data.html#cb10-10" tabindex="-1"></a>all_hens<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">substring</span>(all_hens<span class="sc">$</span>collecting_time, <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb10-11"><a href="sage-grouse-gps-data.html#cb10-11" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="sage-grouse-gps-data.html#cb10-12" tabindex="-1"></a><span class="co"># to convert time from character to numeric</span></span>
+<span id="cb10-13"><a href="sage-grouse-gps-data.html#cb10-13" tabindex="-1"></a><span class="fu">hms</span>(all_hens<span class="sc">$</span>time)</span>
+<span id="cb10-14"><a href="sage-grouse-gps-data.html#cb10-14" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> all_hens <span class="sc">%&gt;%</span> </span>
+<span id="cb10-15"><a href="sage-grouse-gps-data.html#cb10-15" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">timestamp =</span> <span class="fu">ymd_hms</span>(collecting_time, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-16"><a href="sage-grouse-gps-data.html#cb10-16" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">timestamp =</span> <span class="fu">with_tz</span>(timestamp, <span class="st">&quot;US/Mountain&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-17"><a href="sage-grouse-gps-data.html#cb10-17" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>collecting_time)</span>
+<span id="cb10-18"><a href="sage-grouse-gps-data.html#cb10-18" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="sage-grouse-gps-data.html#cb10-19" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> <span class="fu">arrange</span>(all_hens, hen, timestamp)</span>
+<span id="cb10-20"><a href="sage-grouse-gps-data.html#cb10-20" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="sage-grouse-gps-data.html#cb10-21" tabindex="-1"></a><span class="co"># to delete mid-hour GPS fix errors</span></span>
+<span id="cb10-22"><a href="sage-grouse-gps-data.html#cb10-22" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> all_hens <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">minute</span>(timestamp) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">33</span>, <span class="dv">38</span>, <span class="dv">47</span>, <span class="dv">56</span>))</span>
+<span id="cb10-23"><a href="sage-grouse-gps-data.html#cb10-23" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="sage-grouse-gps-data.html#cb10-24" tabindex="-1"></a><span class="co"># to convert CRS from lat/long to UTMs</span></span>
+<span id="cb10-25"><a href="sage-grouse-gps-data.html#cb10-25" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(all_hens, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>))</span>
+<span id="cb10-26"><a href="sage-grouse-gps-data.html#cb10-26" tabindex="-1"></a><span class="fu">st_crs</span>(all_hens) <span class="ot">&lt;-</span> <span class="fu">st_crs</span>(<span class="dv">4326</span>)</span>
+<span id="cb10-27"><a href="sage-grouse-gps-data.html#cb10-27" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(all_hens, <span class="at">crs =</span> <span class="dv">32611</span>)</span>
+<span id="cb10-28"><a href="sage-grouse-gps-data.html#cb10-28" tabindex="-1"></a>UTMs <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(all_hens)</span>
+<span id="cb10-29"><a href="sage-grouse-gps-data.html#cb10-29" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> all_hens <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">cbind</span>(UTMs) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>geometry) <span class="sc">%&gt;%</span> <span class="fu">clean_names</span>()</span>
+<span id="cb10-30"><a href="sage-grouse-gps-data.html#cb10-30" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="sage-grouse-gps-data.html#cb10-31" tabindex="-1"></a><span class="co"># drop NA or NaN coordinates</span></span>
+<span id="cb10-32"><a href="sage-grouse-gps-data.html#cb10-32" tabindex="-1"></a>all_hens <span class="ot">&lt;-</span> all_hens <span class="sc">%&gt;%</span> </span>
+<span id="cb10-33"><a href="sage-grouse-gps-data.html#cb10-33" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(x) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(y))</span>
+<span id="cb10-34"><a href="sage-grouse-gps-data.html#cb10-34" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="sage-grouse-gps-data.html#cb10-35" tabindex="-1"></a><span class="do">## time to join capture data with GPS data ----</span></span>
+<span id="cb10-36"><a href="sage-grouse-gps-data.html#cb10-36" tabindex="-1"></a>capture <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Capture.csv&quot;</span>)</span>
+<span id="cb10-37"><a href="sage-grouse-gps-data.html#cb10-37" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="sage-grouse-gps-data.html#cb10-38" tabindex="-1"></a>capture <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(capture) <span class="sc">%&gt;%</span> <span class="fu">select</span>(date, time_released, ptt_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-39"><a href="sage-grouse-gps-data.html#cb10-39" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ptt_id =</span> <span class="fu">tolower</span>(ptt_id)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">release_d_t =</span> <span class="fu">paste</span>(date, time_released)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-40"><a href="sage-grouse-gps-data.html#cb10-40" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">hen =</span> ptt_id)</span>
+<span id="cb10-41"><a href="sage-grouse-gps-data.html#cb10-41" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="sage-grouse-gps-data.html#cb10-42" tabindex="-1"></a>capture <span class="ot">&lt;-</span> capture[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>), ]</span>
+<span id="cb10-43"><a href="sage-grouse-gps-data.html#cb10-43" tabindex="-1"></a>capture <span class="ot">&lt;-</span> capture <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">release_d_t =</span> <span class="fu">ymd_hm</span>(release_d_t, <span class="at">tz =</span> <span class="st">&quot;US/Mountain&quot;</span>))</span>
+<span id="cb10-44"><a href="sage-grouse-gps-data.html#cb10-44" tabindex="-1"></a>capture <span class="ot">&lt;-</span> capture <span class="sc">%&gt;%</span> <span class="fu">select</span>(hen, release_d_t)</span>
+<span id="cb10-45"><a href="sage-grouse-gps-data.html#cb10-45" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="sage-grouse-gps-data.html#cb10-46" tabindex="-1"></a>joined_hens <span class="ot">&lt;-</span> <span class="fu">left_join</span>(all_hens, capture)</span>
+<span id="cb10-47"><a href="sage-grouse-gps-data.html#cb10-47" tabindex="-1"></a></span>
+<span id="cb10-48"><a href="sage-grouse-gps-data.html#cb10-48" tabindex="-1"></a><span class="do">## and now we will join mortality data ----</span></span>
+<span id="cb10-49"><a href="sage-grouse-gps-data.html#cb10-49" tabindex="-1"></a>morts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Mortalities.csv&quot;</span>)</span>
+<span id="cb10-50"><a href="sage-grouse-gps-data.html#cb10-50" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="sage-grouse-gps-data.html#cb10-51" tabindex="-1"></a>morts <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(morts) <span class="sc">%&gt;%</span> <span class="fu">select</span>(ptt_id, estimated_date_of_death) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-52"><a href="sage-grouse-gps-data.html#cb10-52" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ptt_id =</span> <span class="fu">tolower</span>(ptt_id)) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">hen =</span> ptt_id) <span class="sc">%&gt;%</span></span>
+<span id="cb10-53"><a href="sage-grouse-gps-data.html#cb10-53" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">est_dod =</span> estimated_date_of_death) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">20</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-54"><a href="sage-grouse-gps-data.html#cb10-54" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">t_ =</span> <span class="st">&quot;01:00&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">death_d_t =</span> <span class="fu">paste</span>(est_dod, t_)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-55"><a href="sage-grouse-gps-data.html#cb10-55" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">death_d_t =</span> <span class="fu">ymd_hm</span>(death_d_t, <span class="at">tz =</span> <span class="st">&quot;US/Mountain&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>est_dod, <span class="sc">-</span>t_)</span>
+<span id="cb10-56"><a href="sage-grouse-gps-data.html#cb10-56" tabindex="-1"></a></span>
+<span id="cb10-57"><a href="sage-grouse-gps-data.html#cb10-57" tabindex="-1"></a>joined_hens <span class="ot">&lt;-</span> <span class="fu">left_join</span>(joined_hens, morts)</span>
+<span id="cb10-58"><a href="sage-grouse-gps-data.html#cb10-58" tabindex="-1"></a></span>
+<span id="cb10-59"><a href="sage-grouse-gps-data.html#cb10-59" tabindex="-1"></a>joined_hens <span class="ot">&lt;-</span> joined_hens <span class="sc">%&gt;%</span> </span>
+<span id="cb10-60"><a href="sage-grouse-gps-data.html#cb10-60" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">end_d_t =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-61"><a href="sage-grouse-gps-data.html#cb10-61" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(death_d_t) <span class="sc">~</span> death_d_t,</span>
+<span id="cb10-62"><a href="sage-grouse-gps-data.html#cb10-62" tabindex="-1"></a>    <span class="fu">is.na</span>(death_d_t) <span class="sc">~</span> <span class="fu">ymd_hms</span>(<span class="st">&quot;2025-12-25 01:00:00&quot;</span>, <span class="at">tz =</span> <span class="st">&quot;US/Mountain&quot;</span>))) <span class="co"># Merry Christmas!</span></span></code></pre></div>
+</div>
+<div id="nest-the-data-not-a-sage-grouse-nest-yet" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Nest (the Data, not a Sage-grouse Nest… yet)<a href="sage-grouse-gps-data.html#nest-the-data-not-a-sage-grouse-nest-yet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now comes the all-important function <strong>nest</strong> within the <code>tidyverse</code> packages. First we will turn the data into a <em>track_xyt</em> object, so that each row is readable by <code>amt</code> functions. After the track, we will nest the data by the “hen” column. As previously mentioned, what this does is nest each hen’s respective GPS data within her own data frame, so that Rstudio can process the data as individuals instead of one larger group.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="sage-grouse-gps-data.html#cb11-1" tabindex="-1"></a><span class="do">## create track and nest ----</span></span>
+<span id="cb11-2"><a href="sage-grouse-gps-data.html#cb11-2" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> <span class="fu">make_track</span>(joined_hens, x, y, timestamp, <span class="at">all_cols =</span> <span class="cn">TRUE</span>, <span class="at">id =</span> hen)</span>
+<span id="cb11-3"><a href="sage-grouse-gps-data.html#cb11-3" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(<span class="st">&quot;hen&quot;</span>, <span class="at">.before =</span> <span class="st">&quot;x_&quot;</span>)</span>
+<span id="cb11-4"><a href="sage-grouse-gps-data.html#cb11-4" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(<span class="st">&quot;t_&quot;</span>, <span class="at">.before =</span> <span class="st">&quot;x_&quot;</span>)</span>
+<span id="cb11-5"><a href="sage-grouse-gps-data.html#cb11-5" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">nest</span>(<span class="at">data =</span> <span class="sc">-</span>hen)</span></code></pre></div>
+</div>
+<div id="removing-unwanted-gps-fixes" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Removing Unwanted GPS Fixes<a href="sage-grouse-gps-data.html#removing-unwanted-gps-fixes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now that our data is nested, we can work with <code>amt</code> functions that are specific to each individual. The first of these is <strong>tracked_from_to</strong>, where we will remove GPS fixes that fall into one of three categories:</p>
+<ol style="list-style-type: decimal">
+<li>fixes from the backpack prior to its deployment on a hen</li>
+<li>fixes from the backpack after the hen might have slipped it off in the field</li>
+<li>fixes from the backpack after the hen has died with the backpack on</li>
+</ol>
+<p>The “release_d_t” column is when each hen was captured, and the “end_d_t” column is either when the backpack was slipped (that’s just one hen), when she died (three hens), or the last day of the field season (19 hens) which was set as August 1st of 2024 for this first year.</p>
+<p>Note the funny syntax in our code now, using the <strong>lapply</strong> function. This is necessary because of our nested data. In order to manipulate the nested data, the function in question has to be <em>applied</em> to each nested data frame individually, hence… <strong>lapply</strong>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sage-grouse-gps-data.html#cb12-1" tabindex="-1"></a><span class="co"># to remove pre-deployment / slips / post-mort fixes</span></span>
+<span id="cb12-2"><a href="sage-grouse-gps-data.html#cb12-2" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb12-3"><a href="sage-grouse-gps-data.html#cb12-3" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">tracked_from_to</span>(<span class="at">from =</span> x<span class="sc">$</span>release_d_t, <span class="at">to =</span> x<span class="sc">$</span>end_d_t)}))</span>
+<span id="cb12-4"><a href="sage-grouse-gps-data.html#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="sage-grouse-gps-data.html#cb12-5" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data=</span><span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb12-6"><a href="sage-grouse-gps-data.html#cb12-6" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>release_d_t, <span class="sc">-</span>death_d_t, <span class="sc">-</span>end_d_t, <span class="sc">-</span>time, <span class="sc">-</span>date)}))</span></code></pre></div>
+</div>
+<div id="deleting-duplicate-rows" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Deleting Duplicate Rows<a href="sage-grouse-gps-data.html#deleting-duplicate-rows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Satellites aren’t perfect – if they were, it’s likely that I wouldn’t have to do any of this data cleaning at all. One common issue among all satellite-collected GPS data is duplicate rows, where the satellites take multiple fixes at each interval. I’m guessing this is to account for fix accuracy, with the assumption being that if multiple fixes are taken, there will <em>at least</em> be one good one in the bunch. But that’s just my assumption.</p>
+<p>For my project, I am interested in how the hens are using the landscape at the hourly scale. What I’m not interested in is where she was at midnight, and then again 3 minutes later… primarily because it’s probably the exact same spot. Here we will use the <strong>flag_duplicates</strong> function, to parse the data for each hen down to only one fix per hour. Normally, this would be done using a DOP column in the data, which indicates the quality of the fix from satellites. Sadly, I do not have access to that information for my fixes, so instead I created a “fake_DOP” column and just took the first fix from every set of multiples per hour.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sage-grouse-gps-data.html#cb13-1" tabindex="-1"></a><span class="co"># to delete duplicate rows</span></span>
+<span id="cb13-2"><a href="sage-grouse-gps-data.html#cb13-2" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb13-3"><a href="sage-grouse-gps-data.html#cb13-3" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fake_DOP =</span> <span class="dv">1</span>)}))</span>
+<span id="cb13-4"><a href="sage-grouse-gps-data.html#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="sage-grouse-gps-data.html#cb13-5" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb13-6"><a href="sage-grouse-gps-data.html#cb13-6" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">flag_duplicates</span>(<span class="at">gamma =</span> <span class="fu">minutes</span>(<span class="dv">5</span>), <span class="at">DOP =</span> <span class="st">&quot;fake_DOP&quot;</span>)}))</span>
+<span id="cb13-7"><a href="sage-grouse-gps-data.html#cb13-7" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="sage-grouse-gps-data.html#cb13-8" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb13-9"><a href="sage-grouse-gps-data.html#cb13-9" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>duplicate_)}))</span>
+<span id="cb13-10"><a href="sage-grouse-gps-data.html#cb13-10" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="sage-grouse-gps-data.html#cb13-11" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb13-12"><a href="sage-grouse-gps-data.html#cb13-12" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>fake_DOP, <span class="sc">-</span>duplicate_)}))</span></code></pre></div>
+</div>
+<div id="removing-fast-steps" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Removing Fast Steps<a href="sage-grouse-gps-data.html#removing-fast-steps" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Okay, so now we’re down to a data set that contains GPS data for each hen for the entire length of time that we’re interested in. However, as previously mentioned, satellites aren’t perfect. Besides collecting duplicate fixes each hour, sometimes they misgauge the location of the hen altogether (was my hen really in Antarctica on July 6th?? It’s not <em>that hot</em> at the ranch). This is another common occurrence, and we’ll deal with these location errors using the <strong>flag_fast_steps</strong> function. As seen in the code below, a “delta” value must be specified within the function. This is essentially a distance threshold, so that any distance greater than that traveled by the hen in an hour at <em>that delta speed</em> will get flagged. This is how the real fixes (from one hilltop to the next) don’t get flagged, but the error fixes (from Idaho to Antarctica) do get flagged.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sage-grouse-gps-data.html#cb14-1" tabindex="-1"></a><span class="co"># to remove fast steps from satellite error</span></span>
+<span id="cb14-2"><a href="sage-grouse-gps-data.html#cb14-2" tabindex="-1"></a>ffs_2600 <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb14-3"><a href="sage-grouse-gps-data.html#cb14-3" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">flag_fast_steps</span>(<span class="at">delta =</span> <span class="dv">2600</span>, <span class="at">time_unit =</span> <span class="st">&quot;secs&quot;</span>)}))</span>
+<span id="cb14-4"><a href="sage-grouse-gps-data.html#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="sage-grouse-gps-data.html#cb14-5" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> ffs_2600 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb14-6"><a href="sage-grouse-gps-data.html#cb14-6" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>fast_step_) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>fast_step_)}))</span></code></pre></div>
+</div>
+<div id="removing-fast-roundtrips" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Removing Fast Roundtrips<a href="sage-grouse-gps-data.html#removing-fast-roundtrips" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Similar to the last function, <strong>flag_roundtrips</strong> will flag any consecutive two steps that occur outside of a specified threshold. We will use the same “delta” value, but now an “epsilon” value is included as well. I’m not gonna bother explaining the math because I don’t understand it… if you’re curious, seek out Dr. Brian Smith. The major difference between the “fast_steps” function and this “roundtrips” function is that the former only flags individual steps, while this one flags pairs of steps… hence, the roundtrip (and out-and-back movement).</p>
+<p>Note the final line of code here, dealing with hen #19. She had a very unique <em>error</em> step in her data set, in which it was too short to be flagged by both <strong>flag_fast_steps</strong> and <strong>flag_roundtrips</strong>, but if the “delta” value was decreased to include this particular step, then <em>real</em> steps from other hens were falsely getting flagged as well. Fortunately, this was the only step out of thousands that presented this issue, so the best solution was just to remove it manually.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="sage-grouse-gps-data.html#cb15-1" tabindex="-1"></a><span class="co"># to remove round trips from satellite error</span></span>
+<span id="cb15-2"><a href="sage-grouse-gps-data.html#cb15-2" tabindex="-1"></a>frt_5 <span class="ot">&lt;-</span> hen_track <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb15-3"><a href="sage-grouse-gps-data.html#cb15-3" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">flag_roundtrips</span>(<span class="at">delta =</span> <span class="dv">2600</span>, <span class="at">epsilon =</span> <span class="dv">5</span>)}))</span>
+<span id="cb15-4"><a href="sage-grouse-gps-data.html#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="sage-grouse-gps-data.html#cb15-5" tabindex="-1"></a>hen_track <span class="ot">&lt;-</span> frt_5 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb15-6"><a href="sage-grouse-gps-data.html#cb15-6" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>fast_roundtrip_) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>fast_roundtrip_)}))</span>
+<span id="cb15-7"><a href="sage-grouse-gps-data.html#cb15-7" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="sage-grouse-gps-data.html#cb15-8" tabindex="-1"></a>hen_track<span class="sc">$</span>data[[<span class="dv">19</span>]] <span class="ot">&lt;-</span> hen_track<span class="sc">$</span>data[[<span class="dv">19</span>]][<span class="sc">-</span><span class="dv">92</span>, ]</span></code></pre></div>
+</div>
+<div id="check-data-and-export" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> Check Data and Export<a href="sage-grouse-gps-data.html#check-data-and-export" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Well, that’s it for the GPS cleaning. What we are now left with is GPS fixes for each hen, once an hour, from the time the backpack was put on them to the last relevant time this season. Each fix has coordinates and a date and time, so that we know exactly where every hen was at each hour of the time frame of interest.</p>
+<p>The final step in this chapter is to unnest the data and check to see that everything looks as it should. Once checked, the data can be exported to a processed data folder for later manipulation.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sage-grouse-gps-data.html#cb16-1" tabindex="-1"></a><span class="co"># quality check</span></span>
+<span id="cb16-2"><a href="sage-grouse-gps-data.html#cb16-2" tabindex="-1"></a>all_hens_clean <span class="ot">&lt;-</span> <span class="fu">unnest</span>(hen_track, <span class="at">cols =</span> data)</span>
+<span id="cb16-3"><a href="sage-grouse-gps-data.html#cb16-3" tabindex="-1"></a><span class="fu">head</span>(all_hens_clean)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##   hen   t_                       x_       y_
+## * &lt;chr&gt; &lt;dttm&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 3bc   2024-04-28 11:01:01 712802. 4802387.
+## 2 3bc   2024-04-28 12:01:20 712811. 4802368.
+## 3 3bc   2024-04-28 13:01:36 712798. 4802385.
+## 4 3bc   2024-04-28 14:00:47 712804. 4802389.
+## 5 3bc   2024-04-28 15:01:17 712802. 4802386.
+## 6 3bc   2024-04-28 16:01:06 712838. 4802350.</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sage-grouse-gps-data.html#cb18-1" tabindex="-1"></a><span class="co">#write.csv(all_hens_clean, file = &quot;processed_data/all_hens_clean.csv&quot;)</span></span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="building-the-database.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="brooding-hens.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

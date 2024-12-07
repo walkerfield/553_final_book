@@ -1,0 +1,203 @@
+# Building the Database
+
+In this first chapter, we will explore the process of building an SQLite database and tables using R code, and importing data into each table.
+
+## Database Layout
+
+This is a diagram of the final database system that we will build in the following sections. There are two parent tables, Dams and Hens. The Dams table will not have any tables linked to it, and the Hens table will have five tables linked to it that contain different categories of data collected in the field.
+
+![Database layout](../../Assignments/Assignment_4.png)
+
+## Load Necessary Packages and Initiate Database
+
+First we have to load the necessary Rstudio packages for this chapter and build the database. It will be named "MS_grsg", because this is my Master's research and the greater sage-grouse is the focal species.
+
+```{r DBI, eval = FALSE, echo = TRUE}
+# load package
+library(DBI)
+
+# load data
+MS_grsg <- dbConnect(RSQLite::SQLite(),"MS_grsg.db")
+```
+
+## Dams Table
+
+Next, we will begin to build our tables and populate our "MS_grsg" database in SQLite. The first table that we'll build is the Dams table. This table includes dam identification, coordinates, type, status, canopy cover, and various numeric measurements. This is a parent table, and will not have any connections to any other tables created after this (i.e. no foreign key connections).
+
+```{r Dams, eval = FALSE, echo = TRUE}
+# create table
+dbExecute(MS_grsg, 'create table dams(
+    dam_id varchar(10) not null primary key,
+    type char(3) check (type in ("NAT", "BDA")),
+    x real,
+    y real,
+    status char(1) check (status in ("A", "I", "B")),
+    canopy char(1) check (canopy in ("O", "S", "D")),
+    length real,
+    width real,
+    height real,
+    water_table real
+    );')
+
+# read in data
+dams <- read.csv("../../../../MS Work/Analyses/raw_data/Dam Censusing.csv")
+
+# load data into SQL table
+dbWriteTable(MS_grsg, "dams", dams, append = TRUE)
+```
+
+## Hens Table
+
+This table contains only the unique hen identification, created from each GPS backpack, and the sex of the captured bird (hint: they're all females). This is our second parent table for this entire data set. Every table created after this will be linked to this table by way of the "hen_ID" column.
+
+```{r Hens, eval = FALSE, echo = TRUE}
+# create table
+dbExecute(MS_grsg, 'create table hens(
+    hen_ID varchar(6) not null primary key,
+    sex char(1) check(sex in ("M", "F"))
+    );')
+
+# read in data
+hens <- read.csv("../../../../MS Work/Analyses/raw_data/Hens.csv")
+
+# load data into SQL table
+dbWriteTable(MS_grsg, "hens", hens, append = TRUE)
+```
+
+## Captures Table
+
+Here we will create the table that contains all of the data concerning the sage-grouse captures, including PTT identification, VHF frequency, capture date, time, and coordinates, and the weight and age of the bird. This table is linked to the Hens table.
+
+```{r Captures, eval = FALSE, echo = TRUE}
+# create table
+dbExecute(MS_grsg, 'create table capture(
+    cap_event varchar(20) not null primary key,
+    PTT_ID varchar(3),
+    hen_ID varchar(6),
+    VHF_Freq real,
+    date date,
+    time time,
+    x real,
+    y real,
+    weight integer,
+    age varchar(1) check (age in ("A", "Y")),
+    foreign key (hen_ID) references hens(hen_ID)
+    );')
+
+# read in data
+captures <- read.csv("../../../../MS Work/Analyses/raw_data/Capture.csv")
+
+# load data into SQL table
+dbWriteTable(MS_grsg, "capture", captures, append = TRUE)
+```
+
+## GPS Data Table
+
+This table contains the timestamps for each hen's hourly location fix, as well as the coordinates associated with each fix. It is linked to the Hens table.
+
+```{r GPS data, eval = FALSE, echo = TRUE}
+# create table
+dbExecute(MS_grsg, 'create table gps_data(
+    timestamp varchar(50) not null primary key,
+    hen_ID varchar(6),
+    x real,
+    y real,
+    foreign key (hen_ID) references hens(hen_ID)
+    );')
+
+# read in data
+path <- "raw_data/druid/"
+
+f <- list.files(path, recursive = TRUE, pattern = "ArgosData")
+
+# to create a file for all the hens' GPS data for entire season, in a single .csv
+dat <- data.frame()
+
+for (i in 1:length(f)) {
+  
+  current_file <- read.csv(paste0(path, f[i]))
+  
+  dat <- rbind(dat, current_file)}
+
+# now to remove duplicate lines of data so that the file is continuous
+all_hens <- dat[!duplicated(dat), ]
+
+# load data into SQL table
+dbWriteTable(MS_grsg, "gps_data", all_hens, append = TRUE)
+```
+
+## Nests Table
+
+Here, we are creating the table that holds all of the nest information, including coordinates, nest fate, and number of eggs. It is linked to the Hens table.
+
+```{r Nests, eval = FALSE, echo = TRUE}
+# create table
+dbExecute(MS_grsg, 'create table nests(
+    nest_ID varchar(11) not null primary key,
+    hen_ID varchar(6),
+    x real,
+    y real,
+    fate varchar(7) check (fate in ("Hatched", "Failed")),
+    num_of_eggs real,
+    foreign key (hen_ID) references hens(hen_ID)
+    );')
+
+# read in data
+nests <- read.csv("../../../../MS Work/Analyses/raw_data/Nests.csv")
+
+# load data into SQL table
+dbWriteTable(MS_grsg, "nests", nests, append = TRUE)
+```
+
+## Broods Table
+
+This table contains all of the data associated with brood surveys throughout the season. Once a successful nest hatch was confirmed, brood surveys would be initiated for that brooding hen from 5 days after hatch to 50 days, with surveys occurring at 5-day intervals. The data in this table includes date, time, brood age, coordinates, brood status, and the number of chicks found. It is linked to the Hens table.
+
+```{r Broods, eval = FALSE, echo = TRUE}
+# create table
+dbExecute(MS_grsg, 'create table broods(
+    brood_ID varchar(9) not null primary key,
+    hen_ID varchar (6),
+    date date,
+    time time,
+    observer varchar(9) check (observer in ("W_Field", "T_Hoffman")),
+    DAH integer,
+    x real,
+    y real,
+    brood_detected varchar(3) check (brood_detected in ("Yes", "No")),
+    num_of_chicks varchar(2),
+    foreign key (hen_ID) references hens(hen_ID)
+    );')
+
+# read in data
+broods <- read.csv("../../../../MS Work/Analyses/raw_data/Broods.csv")
+
+# load data into SQL table
+dbWriteTable(MS_grsg, "broods", broods, append = TRUE)
+```
+
+## Mortalities Table
+
+Here we will create the table that contains the unfortunate information concerning our dearly departed sage-grouse hens. The data includes the observer that found the hen, date, time, and coordinates, and the estimated day of death as well as fate of the bird (was she depredated, slipped the backpack, or is it unknown?). This table is linked to the Hens table.
+
+```{r Mortalities, eval = FALSE, echo = TRUE}
+# create table
+dbExecute(MS_grsg, 'create table mortalities(
+    mort_ID varchar(8) not null primary key,
+    hen_ID varchar(6),
+    observer varchar(9) check (observer in ("W_Field", "T_Hoffman")),
+    date date,
+    time time,
+    x real,
+    y real,
+    day_of_death date,
+    fate varchar(9) check (fate in ("Mortality", "Slip", "Unknown")),
+    foreign key (hen_ID) references hens(hen_ID)
+    );')
+
+# read in data
+morts <- read.csv("../../../../MS Work/Analyses/raw_data/Mortalities.csv")
+
+# load data into SQL table
+dbWriteTable(MS_grsg, "mortalities", morts, append = TRUE)
+```

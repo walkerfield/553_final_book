@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Brooding Hens | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens</title>
+  <meta name="description" content="Chapter 4 Brooding Hens | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Brooding Hens | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Brooding Hens | Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens" />
+  
+  
+  
+
+<meta name="author" content="Walker Field" />
+
+
+<meta name="date" content="2024-12-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sage-grouse-gps-data.html"/>
+<link rel="next" href="the-beavers.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> A Foreward: Some Background for this Project</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#study-site"><i class="fa fa-check"></i><b>1.1</b> Study Site</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="building-the-database.html"><a href="building-the-database.html"><i class="fa fa-check"></i><b>2</b> Building the Database</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="building-the-database.html"><a href="building-the-database.html#database-layout"><i class="fa fa-check"></i><b>2.1</b> Database Layout</a></li>
+<li class="chapter" data-level="2.2" data-path="building-the-database.html"><a href="building-the-database.html#load-necessary-packages-and-initiate-database"><i class="fa fa-check"></i><b>2.2</b> Load Necessary Packages and Initiate Database</a></li>
+<li class="chapter" data-level="2.3" data-path="building-the-database.html"><a href="building-the-database.html#dams-table"><i class="fa fa-check"></i><b>2.3</b> Dams Table</a></li>
+<li class="chapter" data-level="2.4" data-path="building-the-database.html"><a href="building-the-database.html#hens-table"><i class="fa fa-check"></i><b>2.4</b> Hens Table</a></li>
+<li class="chapter" data-level="2.5" data-path="building-the-database.html"><a href="building-the-database.html#captures-table"><i class="fa fa-check"></i><b>2.5</b> Captures Table</a></li>
+<li class="chapter" data-level="2.6" data-path="building-the-database.html"><a href="building-the-database.html#gps-data-table"><i class="fa fa-check"></i><b>2.6</b> GPS Data Table</a></li>
+<li class="chapter" data-level="2.7" data-path="building-the-database.html"><a href="building-the-database.html#nests-table"><i class="fa fa-check"></i><b>2.7</b> Nests Table</a></li>
+<li class="chapter" data-level="2.8" data-path="building-the-database.html"><a href="building-the-database.html#broods-table"><i class="fa fa-check"></i><b>2.8</b> Broods Table</a></li>
+<li class="chapter" data-level="2.9" data-path="building-the-database.html"><a href="building-the-database.html#mortalities-table"><i class="fa fa-check"></i><b>2.9</b> Mortalities Table</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html"><i class="fa fa-check"></i><b>3</b> Sage-grouse GPS Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#load-packages-and-data"><i class="fa fa-check"></i><b>3.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="3.2" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#clean-the-data"><i class="fa fa-check"></i><b>3.2</b> Clean the Data</a></li>
+<li class="chapter" data-level="3.3" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#nest-the-data-not-a-sage-grouse-nest-yet"><i class="fa fa-check"></i><b>3.3</b> Nest (the Data, not a Sage-grouse Nest… yet)</a></li>
+<li class="chapter" data-level="3.4" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-unwanted-gps-fixes"><i class="fa fa-check"></i><b>3.4</b> Removing Unwanted GPS Fixes</a></li>
+<li class="chapter" data-level="3.5" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#deleting-duplicate-rows"><i class="fa fa-check"></i><b>3.5</b> Deleting Duplicate Rows</a></li>
+<li class="chapter" data-level="3.6" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-fast-steps"><i class="fa fa-check"></i><b>3.6</b> Removing Fast Steps</a></li>
+<li class="chapter" data-level="3.7" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#removing-fast-roundtrips"><i class="fa fa-check"></i><b>3.7</b> Removing Fast Roundtrips</a></li>
+<li class="chapter" data-level="3.8" data-path="sage-grouse-gps-data.html"><a href="sage-grouse-gps-data.html#check-data-and-export"><i class="fa fa-check"></i><b>3.8</b> Check Data and Export</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="brooding-hens.html"><a href="brooding-hens.html"><i class="fa fa-check"></i><b>4</b> Brooding Hens</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="brooding-hens.html"><a href="brooding-hens.html#load-packages-and-data-1"><i class="fa fa-check"></i><b>4.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="4.2" data-path="brooding-hens.html"><a href="brooding-hens.html#nests"><i class="fa fa-check"></i><b>4.2</b> Nests</a></li>
+<li class="chapter" data-level="4.3" data-path="brooding-hens.html"><a href="brooding-hens.html#non-attempts"><i class="fa fa-check"></i><b>4.3</b> Non-attempts</a></li>
+<li class="chapter" data-level="4.4" data-path="brooding-hens.html"><a href="brooding-hens.html#its-a-mama-party"><i class="fa fa-check"></i><b>4.4</b> It’s a Mama Party</a></li>
+<li class="chapter" data-level="4.5" data-path="brooding-hens.html"><a href="brooding-hens.html#brood-data"><i class="fa fa-check"></i><b>4.5</b> Brood Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-beavers.html"><a href="the-beavers.html"><i class="fa fa-check"></i><b>5</b> The Beavers</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-beavers.html"><a href="the-beavers.html#load-packages-and-data-2"><i class="fa fa-check"></i><b>5.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="5.2" data-path="the-beavers.html"><a href="the-beavers.html#clean-the-dam-data"><i class="fa fa-check"></i><b>5.2</b> Clean the (Dam) Data</a></li>
+<li class="chapter" data-level="5.3" data-path="the-beavers.html"><a href="the-beavers.html#template"><i class="fa fa-check"></i><b>5.3</b> Template</a></li>
+<li class="chapter" data-level="5.4" data-path="the-beavers.html"><a href="the-beavers.html#dam-conversion"><i class="fa fa-check"></i><b>5.4</b> Dam Conversion</a></li>
+<li class="chapter" data-level="5.5" data-path="the-beavers.html"><a href="the-beavers.html#raster-calculations"><i class="fa fa-check"></i><b>5.5</b> Raster Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lets-plot.html"><a href="lets-plot.html"><i class="fa fa-check"></i><b>6</b> Let’s Plot!</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="lets-plot.html"><a href="lets-plot.html#load-packages-and-data-3"><i class="fa fa-check"></i><b>6.1</b> Load Packages and Data</a></li>
+<li class="chapter" data-level="6.2" data-path="lets-plot.html"><a href="lets-plot.html#visualize-the-data"><i class="fa fa-check"></i><b>6.2</b> Visualize the Data</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quantifying Effects of Beaver Dams on Brooding Greater Sage-grouse Hens</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="brooding-hens" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Brooding Hens<a href="brooding-hens.html#brooding-hens" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Now that we’ve got a GPS data set all cleaned up, the next step is to separate it for our hens of interest: the brooding hens, the mamas, the gals carrying the team. Since the end goal is to ultimately analyze the space-use decisions of <em>brooding hens</em>, this chapter is where we’ll acquire that data. The process is fairly easy, and the function to use is one we’ve seen in the previous chapter.</p>
+<div id="load-packages-and-data-1" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Load Packages and Data<a href="brooding-hens.html#load-packages-and-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First, as usual, we’ll load the necessary packages and load in our data (the now clean GPS data that we created in the previous chapter).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="brooding-hens.html#cb19-1" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb19-2"><a href="brooding-hens.html#cb19-2" tabindex="-1"></a><span class="fu">library</span>(amt)</span>
+<span id="cb19-3"><a href="brooding-hens.html#cb19-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb19-4"><a href="brooding-hens.html#cb19-4" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb19-5"><a href="brooding-hens.html#cb19-5" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb19-6"><a href="brooding-hens.html#cb19-6" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="brooding-hens.html#cb19-7" tabindex="-1"></a><span class="do">## load GPS data ----</span></span>
+<span id="cb19-8"><a href="brooding-hens.html#cb19-8" tabindex="-1"></a>hens <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/processed_data/all_hens_clean.csv&quot;</span>) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>X)</span>
+<span id="cb19-9"><a href="brooding-hens.html#cb19-9" tabindex="-1"></a>hens<span class="sc">$</span>t_ <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(hens<span class="sc">$</span>t_)</span></code></pre></div>
+</div>
+<div id="nests" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Nests<a href="brooding-hens.html#nests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Next is to load in the nest database, which contains all of the information about each hen’s nest. Ultimately, the only three columns that we’re interested in are the hen identifier, the nest fate, and the estimated day of that fate.</p>
+<p>Once we load in the nest data and clean it up to our liking, we’ll join it to the hen GPS data by the “hen” column. That way, what we’ll be left with is GPS data for each hen with her nest information of interest.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="brooding-hens.html#cb20-1" tabindex="-1"></a><span class="do">## load in nest database and clean up ----</span></span>
+<span id="cb20-2"><a href="brooding-hens.html#cb20-2" tabindex="-1"></a>nests <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Nests.csv&quot;</span>)</span>
+<span id="cb20-3"><a href="brooding-hens.html#cb20-3" tabindex="-1"></a>nests <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(nests) <span class="sc">%&gt;%</span> <span class="fu">select</span>(ptt_id, nest_fate, fate_date_estimate) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="brooding-hens.html#cb20-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ptt_id =</span> <span class="fu">tolower</span>(ptt_id)) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">hen =</span> ptt_id)</span>
+<span id="cb20-5"><a href="brooding-hens.html#cb20-5" tabindex="-1"></a>nests <span class="ot">&lt;-</span> nests[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">17</span>, <span class="dv">21</span>), ]</span>
+<span id="cb20-6"><a href="brooding-hens.html#cb20-6" tabindex="-1"></a>nests<span class="sc">$</span>fate_date_estimate <span class="ot">&lt;-</span> <span class="fu">ymd</span>(nests<span class="sc">$</span>fate_date_estimate)</span>
+<span id="cb20-7"><a href="brooding-hens.html#cb20-7" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="brooding-hens.html#cb20-8" tabindex="-1"></a><span class="co"># alright, now let&#39;s join nests to hens</span></span>
+<span id="cb20-9"><a href="brooding-hens.html#cb20-9" tabindex="-1"></a>hen_fate <span class="ot">&lt;-</span> <span class="fu">left_join</span>(hens, nests)</span></code></pre></div>
+</div>
+<div id="non-attempts" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Non-attempts<a href="brooding-hens.html#non-attempts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In an ideal world, every hen would attempt a nest and lay eggs, and they would all hatch successfully and we’d have sage-grouse around every bush. However, that doesn’t happen for a multitude of reasons, one of which is that sometimes a gal just doesn’t feel like laying eggs that year. Can’t blame her, right? So we have to drop those girls from the data set, because as important as their existence is, their space-use decisions are not of interest to us.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="brooding-hens.html#cb21-1" tabindex="-1"></a><span class="co"># drop the hens that never attempted</span></span>
+<span id="cb21-2"><a href="brooding-hens.html#cb21-2" tabindex="-1"></a>hen_fate <span class="ot">&lt;-</span> hen_fate <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(nest_fate))</span></code></pre></div>
+</div>
+<div id="its-a-mama-party" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> It’s a Mama Party<a href="brooding-hens.html#its-a-mama-party" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The next step is to pull <em>only</em> the brooding hens’ data from the larger data set. Thankfully, this will be easy because of our “nest_fate” column from the Nests table, which specifies whether each nest hatched or failed. Note the new name of the data set: b_hens.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="brooding-hens.html#cb22-1" tabindex="-1"></a><span class="co"># successful nests only</span></span>
+<span id="cb22-2"><a href="brooding-hens.html#cb22-2" tabindex="-1"></a>b_hens <span class="ot">&lt;-</span> hen_fate[hen_fate<span class="sc">$</span>nest_fate <span class="sc">==</span> <span class="st">&quot;Hatched&quot;</span>, ]</span></code></pre></div>
+</div>
+<div id="brood-data" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Brood Data<a href="brooding-hens.html#brood-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The last few lines of code in this chapter involve the brood survey data that was collected out in the field. A “Final_Broods” table is loaded in, which contains the information for each brooding hen’s final survey of the season, whether that be the 50-day mark because her and her brood survived the entire time, or some point prior to that 50 days because either the hen died or she lost her chicks. The important thing is that after we join this data to our “b_hens” data set, we will be able to further partition the brooding hen data down to the time of nest hatch to the final survey for each hen, thus giving us a complete brooding hen GPS data set that we can analyze with respect to a multitude of variables.</p>
+<p>You’ll recognize the <strong>tracked_from_to</strong> function, which is what we used in the previous chapter to initially partition the GPS data. Here, we are using it again to achieve the finalized GPS data set, where each brooding hen’s data will run from the day of nest hatch to the final survey date of the season. As usual, the last line of code is to export our manipulated data.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="brooding-hens.html#cb23-1" tabindex="-1"></a><span class="do">## load in brood data ----</span></span>
+<span id="cb23-2"><a href="brooding-hens.html#cb23-2" tabindex="-1"></a>broods <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;../../../../MS Work/Analyses/raw_data/Final_Broods.csv&quot;</span>)</span>
+<span id="cb23-3"><a href="brooding-hens.html#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="brooding-hens.html#cb23-4" tabindex="-1"></a>broods <span class="ot">&lt;-</span> broods[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">11</span><span class="sc">:</span><span class="dv">17</span>), ]</span>
+<span id="cb23-5"><a href="brooding-hens.html#cb23-5" tabindex="-1"></a>broods <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(broods) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(ptt_id, date, scheduled_dah, brood_suspected) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="brooding-hens.html#cb23-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ptt_id =</span> <span class="fu">tolower</span>(ptt_id)) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">hen =</span> ptt_id) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">final_date =</span> date)</span>
+<span id="cb23-7"><a href="brooding-hens.html#cb23-7" tabindex="-1"></a>broods<span class="sc">$</span>final_date <span class="ot">&lt;-</span> <span class="fu">mdy</span>(broods<span class="sc">$</span>final_date)</span>
+<span id="cb23-8"><a href="brooding-hens.html#cb23-8" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="brooding-hens.html#cb23-9" tabindex="-1"></a><span class="co"># join the two data sets</span></span>
+<span id="cb23-10"><a href="brooding-hens.html#cb23-10" tabindex="-1"></a>b_hens <span class="ot">&lt;-</span> <span class="fu">left_join</span>(b_hens, broods)</span>
+<span id="cb23-11"><a href="brooding-hens.html#cb23-11" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="brooding-hens.html#cb23-12" tabindex="-1"></a><span class="co"># track each hen from nest hatch to final survey</span></span>
+<span id="cb23-13"><a href="brooding-hens.html#cb23-13" tabindex="-1"></a>b_hens <span class="ot">&lt;-</span> b_hens <span class="sc">%&gt;%</span> <span class="fu">tracked_from_to</span>(<span class="at">from =</span> b_hens<span class="sc">$</span>fate_date_estimate, <span class="at">to =</span> b_hens<span class="sc">$</span>final_date <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-14"><a href="brooding-hens.html#cb23-14" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>nest_fate, <span class="sc">-</span>fate_date_estimate, <span class="sc">-</span>scheduled_dah, <span class="sc">-</span>final_date, <span class="sc">-</span>brood_suspected)</span>
+<span id="cb23-15"><a href="brooding-hens.html#cb23-15" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="brooding-hens.html#cb23-16" tabindex="-1"></a><span class="co">#write.csv(b_hens, file = &quot;processed_data/brooding_hens.csv&quot;)</span></span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sage-grouse-gps-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-beavers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-parts.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

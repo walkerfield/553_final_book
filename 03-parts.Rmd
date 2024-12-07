@@ -1,0 +1,80 @@
+# Brooding Hens
+
+Now that we've got a GPS data set all cleaned up, the next step is to separate it for our hens of interest: the brooding hens, the mamas, the gals carrying the team. Since the end goal is to ultimately analyze the space-use decisions of *brooding hens*, this chapter is where we'll acquire that data. The process is fairly easy, and the function to use is one we've seen in the previous chapter.
+
+## Load Packages and Data
+
+First, as usual, we'll load the necessary packages and load in our data (the now clean GPS data that we created in the previous chapter).
+
+```{r Brood_01, eval = TRUE, message = FALSE, warning = FALSE}
+# load packages
+library(amt)
+library(tidyverse)
+library(dplyr)
+library(janitor)
+
+## load GPS data ----
+hens <- read.csv("../../../../MS Work/Analyses/processed_data/all_hens_clean.csv") %>% dplyr::select(-X)
+hens$t_ <- ymd_hms(hens$t_)
+```
+
+## Nests
+
+Next is to load in the nest database, which contains all of the information about each hen's nest. Ultimately, the only three columns that we're interested in are the hen identifier, the nest fate, and the estimated day of that fate.
+
+Once we load in the nest data and clean it up to our liking, we'll join it to the hen GPS data by the "hen" column. That way, what we'll be left with is GPS data for each hen with her nest information of interest.
+
+```{r Brood_02, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+## load in nest database and clean up ----
+nests <- read.csv("../../../../MS Work/Analyses/raw_data/Nests.csv")
+nests <- clean_names(nests) %>% select(ptt_id, nest_fate, fate_date_estimate) %>%
+  mutate(ptt_id = tolower(ptt_id)) %>% rename(hen = ptt_id)
+nests <- nests[-c(10, 17, 21), ]
+nests$fate_date_estimate <- ymd(nests$fate_date_estimate)
+
+# alright, now let's join nests to hens
+hen_fate <- left_join(hens, nests)
+```
+
+## Non-attempts
+
+In an ideal world, every hen would attempt a nest and lay eggs, and they would all hatch successfully and we'd have sage-grouse around every bush. However, that doesn't happen for a multitude of reasons, one of which is that sometimes a gal just doesn't feel like laying eggs that year. Can't blame her, right? So we have to drop those girls from the data set, because as important as their existence is, their space-use decisions are not of interest to us.
+
+```{r Brood_03, eval = TRUE, echo = TRUE}
+# drop the hens that never attempted
+hen_fate <- hen_fate %>% filter(!is.na(nest_fate))
+```
+
+## It's a Mama Party
+
+The next step is to pull *only* the brooding hens' data from the larger data set. Thankfully, this will be easy because of our "nest_fate" column from the Nests table, which specifies whether each nest hatched or failed. Note the new name of the data set: b_hens.
+
+```{r Brood_04, eval = TRUE, echo = TRUE}
+# successful nests only
+b_hens <- hen_fate[hen_fate$nest_fate == "Hatched", ]
+```
+
+## Brood Data
+
+The last few lines of code in this chapter involve the brood survey data that was collected out in the field. A "Final_Broods" table is loaded in, which contains the information for each brooding hen's final survey of the season, whether that be the 50-day mark because her and her brood survived the entire time, or some point prior to that 50 days because either the hen died or she lost her chicks. The important thing is that after we join this data to our "b_hens" data set, we will be able to further partition the brooding hen data down to the time of nest hatch to the final survey for each hen, thus giving us a complete brooding hen GPS data set that we can analyze with respect to a multitude of variables.
+
+You'll recognize the **tracked_from_to** function, which is what we used in the previous chapter to initially partition the GPS data. Here, we are using it again to achieve the finalized GPS data set, where each brooding hen's data will run from the day of nest hatch to the final survey date of the season. As usual, the last line of code is to export our manipulated data.
+
+```{r Brood_05, eval = TRUE, echo = TRUE, message = FALSE}
+## load in brood data ----
+broods <- read.csv("../../../../MS Work/Analyses/raw_data/Final_Broods.csv")
+
+broods <- broods[-c(11:17), ]
+broods <- clean_names(broods) %>% dplyr::select(ptt_id, date, scheduled_dah, brood_suspected) %>% 
+  mutate(ptt_id = tolower(ptt_id)) %>% rename(hen = ptt_id) %>% rename(final_date = date)
+broods$final_date <- mdy(broods$final_date)
+
+# join the two data sets
+b_hens <- left_join(b_hens, broods)
+
+# track each hen from nest hatch to final survey
+b_hens <- b_hens %>% tracked_from_to(from = b_hens$fate_date_estimate, to = b_hens$final_date + 1) %>% 
+  select(-nest_fate, -fate_date_estimate, -scheduled_dah, -final_date, -brood_suspected)
+
+#write.csv(b_hens, file = "processed_data/brooding_hens.csv")
+```

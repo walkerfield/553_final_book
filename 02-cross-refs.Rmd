@@ -1,0 +1,204 @@
+# Sage-grouse GPS Data
+
+This chapter will discuss the manipulation of sage-grouse GPS data, collected by GPS backpacks at a 1-hour interval, 24 hours a day. The purpose of the GPS data is to analyze brooding hen space-use decisions within the landscape. The code in this chapter is the longest included in this document, but it will be broken down into sections in order to improve digestibility.
+
+## Load Packages and Data
+
+First, we must load our required packages for this script, then load the necessary data into the Rstudio environment.
+
+```{r Cleaning_01, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+# load packages
+library(tidyverse)
+library(janitor)
+library(readxl)
+library(dplyr)
+library(amt)
+library(sf)
+options(digits=10)
+
+## combine all hen data into one csv ----
+
+# change path to working directory:
+path <- "../../../../MS Work/Analyses/raw_data/druid/"
+
+f <- list.files(path, recursive = TRUE, pattern = "ArgosData")
+
+# to create a file for all the hens' GPS data for entire season, in a single .csv
+dat <- data.frame()
+
+for (i in 1:length(f)) {
+  
+  current_file <- read.csv(paste0(path, f[i]))
+  
+  dat <- rbind(dat, current_file)}
+
+# now to remove duplicate lines of data so that the file is continuous
+all_hens <- dat[!duplicated(dat), ]
+```
+
+## Clean the Data
+
+Now, we will begin the long task of cleaning. It is important to note that because we're working with 23 individual birds, at some point in this script we will have to nest each hen's data within its own data frame. That must be done so that R recognizes each hen's respective GPS data as an individual; otherwise, if we continued working within a single data frame, R would not recognize the GPS data as belonging to 23 individuals, *even though each GPS fix is associated with the hen it belongs to*. But we don't have to worry about that yet! The initial cleaning can be done within a single data frame, because the functions we're using don't have to apply to each individual, but to the data set as a whole. See the section subheadings, denoted with #, for an explanation of the code being used.
+
+```{r Cleaning_02, eval = TRUE, echo = TRUE, message = FALSE, results = 'hide'}
+# to clean up names and remove unwanted columns
+all_hens <- clean_names(all_hens) %>% dplyr::select(-synchronizing_time, -transmitting_time, -altitude)
+
+# to change uuid column to "hen"
+all_hens$hen <-  substring(all_hens$uuid, 8, 10)
+all_hens <- all_hens %>% select(-uuid) %>% relocate("hen", .before = "collecting_time")
+
+# split up collecting_time column
+all_hens$time <- substring(all_hens$collecting_time, 12, 19)
+all_hens$date <- substring(all_hens$collecting_time, 1, 10)
+
+# to convert time from character to numeric
+hms(all_hens$time)
+all_hens <- all_hens %>% 
+  mutate(timestamp = ymd_hms(collecting_time, tz = "UTC")) %>% 
+  mutate(timestamp = with_tz(timestamp, "US/Mountain")) %>% 
+  select(-collecting_time)
+
+all_hens <- arrange(all_hens, hen, timestamp)
+
+# to delete mid-hour GPS fix errors
+all_hens <- all_hens %>% filter(!minute(timestamp) %in% c(23, 25, 33, 38, 47, 56))
+
+# to convert CRS from lat/long to UTMs
+all_hens <- st_as_sf(all_hens, coords = c("longitude", "latitude"))
+st_crs(all_hens) <- st_crs(4326)
+all_hens <- st_transform(all_hens, crs = 32611)
+UTMs <- st_coordinates(all_hens)
+all_hens <- all_hens %>% as.data.frame() %>% cbind(UTMs) %>% select(-geometry) %>% clean_names()
+
+# drop NA or NaN coordinates
+all_hens <- all_hens %>% 
+  filter(!is.na(x) & !is.na(y))
+
+## time to join capture data with GPS data ----
+capture <- read.csv("../../../../MS Work/Analyses/raw_data/Capture.csv")
+
+capture <- clean_names(capture) %>% select(date, time_released, ptt_id) %>% 
+  mutate(ptt_id = tolower(ptt_id)) %>% mutate(release_d_t = paste(date, time_released)) %>% 
+  rename(hen = ptt_id)
+
+capture <- capture[-c(5, 7:9), ]
+capture <- capture %>% mutate(release_d_t = ymd_hm(release_d_t, tz = "US/Mountain"))
+capture <- capture %>% select(hen, release_d_t)
+
+joined_hens <- left_join(all_hens, capture)
+
+## and now we will join mortality data ----
+morts <- read.csv("../../../../MS Work/Analyses/raw_data/Mortalities.csv")
+
+morts <- clean_names(morts) %>% select(ptt_id, estimated_date_of_death) %>% 
+  mutate(ptt_id = tolower(ptt_id)) %>% rename(hen = ptt_id) %>%
+  rename(est_dod = estimated_date_of_death) %>% slice(-(5:20)) %>% 
+  mutate(t_ = "01:00") %>% mutate(death_d_t = paste(est_dod, t_)) %>% 
+  mutate(death_d_t = ymd_hm(death_d_t, tz = "US/Mountain")) %>% select(-est_dod, -t_)
+
+joined_hens <- left_join(joined_hens, morts)
+
+joined_hens <- joined_hens %>% 
+  mutate(end_d_t = case_when(
+    !is.na(death_d_t) ~ death_d_t,
+    is.na(death_d_t) ~ ymd_hms("2025-12-25 01:00:00", tz = "US/Mountain"))) # Merry Christmas!
+```
+
+## Nest (the Data, not a Sage-grouse Nest... yet)
+
+Now comes the all-important function **nest** within the `tidyverse` packages. First we will turn the data into a *track_xyt* object, so that each row is readable by `amt` functions. After the track, we will nest the data by the "hen" column. As previously mentioned, what this does is nest each hen's respective GPS data within her own data frame, so that Rstudio can process the data as individuals instead of one larger group.
+
+```{r Cleaning_03, eval = TRUE, echo = TRUE}
+## create track and nest ----
+hen_track <- make_track(joined_hens, x, y, timestamp, all_cols = TRUE, id = hen)
+hen_track <- hen_track %>% relocate("hen", .before = "x_")
+hen_track <- hen_track %>% relocate("t_", .before = "x_")
+hen_track <- hen_track %>% nest(data = -hen)
+```
+
+## Removing Unwanted GPS Fixes
+
+Now that our data is nested, we can work with `amt` functions that are specific to each individual. The first of these is **tracked_from_to**, where we will remove GPS fixes that fall into one of three categories:
+
+  1) fixes from the backpack prior to its deployment on a hen
+  2) fixes from the backpack after the hen might have slipped it off in the field
+  3) fixes from the backpack after the hen has died with the backpack on
+  
+The "release_d_t" column is when each hen was captured, and the "end_d_t" column is either when the backpack was slipped (that's just one hen), when she died (three hens), or the last day of the field season (19 hens) which was set as August 1st of 2024 for this first year.
+
+Note the funny syntax in our code now, using the **lapply** function. This is necessary because of our nested data. In order to manipulate the nested data, the function in question has to be *applied* to each nested data frame individually, hence... **lapply**.
+
+```{r Cleaning_04, eval = TRUE, echo = TRUE}
+# to remove pre-deployment / slips / post-mort fixes
+hen_track <- hen_track %>% mutate(data = lapply(data, function(x) {
+  x %>% tracked_from_to(from = x$release_d_t, to = x$end_d_t)}))
+
+hen_track <- hen_track %>% mutate(data=lapply(data, function(x) {
+  x %>% select(-release_d_t, -death_d_t, -end_d_t, -time, -date)}))
+```
+
+## Deleting Duplicate Rows
+
+Satellites aren't perfect -- if they were, it's likely that I wouldn't have to do any of this data cleaning at all. One common issue among all satellite-collected GPS data is duplicate rows, where the satellites take multiple fixes at each interval. I'm guessing this is to account for fix accuracy, with the assumption being that if multiple fixes are taken, there will *at least* be one good one in the bunch. But that's just my assumption.
+
+For my project, I am interested in how the hens are using the landscape at the hourly scale. What I'm not interested in is where she was at midnight, and then again 3 minutes later... primarily because it's probably the exact same spot. Here we will use the **flag_duplicates** function, to parse the data for each hen down to only one fix per hour. Normally, this would be done using a DOP column in the data, which indicates the quality of the fix from satellites. Sadly, I do not have access to that information for my fixes, so instead I created a "fake_DOP" column and just took the first fix from every set of multiples per hour.
+
+```{r Cleaning_05, eval = TRUE, echo = TRUE}
+# to delete duplicate rows
+hen_track <- hen_track %>% mutate(data = lapply(data, function(x) {
+  x %>% mutate(fake_DOP = 1)}))
+
+hen_track <- hen_track %>% mutate(data = lapply(data, function(x) {
+  x %>% flag_duplicates(gamma = minutes(5), DOP = "fake_DOP")}))
+
+hen_track <- hen_track %>% mutate(data = lapply(data, function(x) {
+  x %>% filter(!duplicate_)}))
+
+hen_track <- hen_track %>% mutate(data = lapply(data, function(x) {
+  x %>% select(-fake_DOP, -duplicate_)}))
+```
+
+## Removing Fast Steps
+
+Okay, so now we're down to a data set that contains GPS data for each hen for the entire length of time that we're interested in. However, as previously mentioned, satellites aren't perfect. Besides collecting duplicate fixes each hour, sometimes they misgauge the location of the hen altogether (was my hen really in Antarctica on July 6th?? It's not *that hot* at the ranch). This is another common occurrence, and we'll deal with these location errors using the **flag_fast_steps** function. As seen in the code below, a "delta" value must be specified within the function. This is essentially a distance threshold, so that any distance greater than that traveled by the hen in an hour at *that delta speed* will get flagged. This is how the real fixes (from one hilltop to the next) don't get flagged, but the error fixes (from Idaho to Antarctica) do get flagged.
+
+```{r Cleaning_06, eval = TRUE, echo = TRUE}
+# to remove fast steps from satellite error
+ffs_2600 <- hen_track %>% mutate(data = lapply(data, function(x) {
+  x %>% flag_fast_steps(delta = 2600, time_unit = "secs")}))
+
+hen_track <- ffs_2600 %>% mutate(data = lapply(data, function(x) {
+  x %>% filter(!fast_step_) %>% select(-fast_step_)}))
+```
+
+## Removing Fast Roundtrips
+
+Similar to the last function, **flag_roundtrips** will flag any consecutive two steps that occur outside of a specified threshold. We will use the same "delta" value, but now an "epsilon" value is included as well. I'm not gonna bother explaining the math because I don't understand it... if you're curious, seek out Dr. Brian Smith. The major difference between the "fast_steps" function and this "roundtrips" function is that the former only flags individual steps, while this one flags pairs of steps... hence, the roundtrip (and out-and-back movement).
+
+Note the final line of code here, dealing with hen #19. She had a very unique *error* step in her data set, in which it was too short to be flagged by both **flag_fast_steps** and **flag_roundtrips**, but if the "delta" value was decreased to include this particular step, then *real* steps from other hens were falsely getting flagged as well. Fortunately, this was the only step out of thousands that presented this issue, so the best solution was just to remove it manually.
+
+```{r Cleaning_07, eval = TRUE, echo = TRUE}
+# to remove round trips from satellite error
+frt_5 <- hen_track %>% mutate(data = lapply(data, function(x) {
+  x %>% flag_roundtrips(delta = 2600, epsilon = 5)}))
+
+hen_track <- frt_5 %>% mutate(data = lapply(data, function(x) {
+  x %>% filter(!fast_roundtrip_) %>% select(-fast_roundtrip_)}))
+
+hen_track$data[[19]] <- hen_track$data[[19]][-92, ]
+```
+
+## Check Data and Export
+
+Well, that's it for the GPS cleaning. What we are now left with is GPS fixes for each hen, once an hour, from the time the backpack was put on them to the last relevant time this season. Each fix has coordinates and a date and time, so that we know exactly where every hen was at each hour of the time frame of interest.
+
+The final step in this chapter is to unnest the data and check to see that everything looks as it should. Once checked, the data can be exported to a processed data folder for later manipulation.
+
+```{r Cleaning_08, eval = TRUE, echo = TRUE}
+# quality check
+all_hens_clean <- unnest(hen_track, cols = data)
+head(all_hens_clean)
+
+#write.csv(all_hens_clean, file = "processed_data/all_hens_clean.csv")
+```
